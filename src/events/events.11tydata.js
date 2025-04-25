@@ -32,6 +32,7 @@ module.exports = async function () {
       name: event.name || "",
       ticket_link: event.ticketing_url || "",
       venue: event.venue?.name || "",
+      venue_location_url: event.venue?.location_url || "",
       address: event.venue?.address || "",
       start_time: event.start_time || "",
       formatted_time: event.start_time || "",

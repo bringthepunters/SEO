@@ -7,6 +7,28 @@
   <link rel="icon" href="/favicon.ico" />
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      html, body, .prose {
+        text-rendering: optimizeLegibility;
+        font-feature-settings: "kern" 1, "liga" 1;
+        -webkit-font-feature-settings: "kern" 1, "liga" 1;
+        font-kerning: normal;
+        line-height: 1.5;
+        /* Optional: improve font smoothing for macOS */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Headings: tighter letter spacing for display */
+      h1, h2, h3, h4, h5, h6 {
+        letter-spacing: -0.01em;
+        font-variant-ligatures: common-ligatures;
+      }
+      /* Optional: improve link appearance */
+      a {
+        text-underline-position: under;
+        text-decoration-thickness: 1.5px;
+      }
+    </style>
 </head>
 <body class="bg-white text-black font-serif">
 
