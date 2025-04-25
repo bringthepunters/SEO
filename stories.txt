@@ -1,8 +1,7 @@
-1. Provision Hosting & Domain
-Description:
-– Create a Firebase project, connect livemusiclocator.com.au, deploy a “Hello World” page to verify DNS & SSL.
+
+
 Value:
-Validates that our custom domain and Firebase Hosting are configured correctly before building out content.
+Validates that Firebase Hosting is set up and a static site can be deployed to the Firebase-provided domain before further development.
 
 2. Scaffold Eleventy Project
 Description:

@@ -4,11 +4,11 @@ Each smoke test below corresponds to a story in `stories.txt` and is designed to
 
 ---
 
-## 1. Provision Hosting & Domain
+## 1. Provision Firebase Hosting
 
-**Smoke Test:**  
-- Visit https://livemusiclocator.com.au and confirm that a "Hello World" page is served over HTTPS with a valid SSL certificate.  
-- Verify that the domain is connected to Firebase Hosting.
+**Smoke Test:**
+- Visit the Firebase-provided domain (e.g., https://allgigs.web.app) and confirm that a "Hello World" page is served over HTTPS with a valid SSL certificate.
+- Verify that Firebase Hosting is provisioned and the deployment is documented in ONBOARDING.md.
 
 ---
 
