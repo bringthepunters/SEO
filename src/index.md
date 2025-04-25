@@ -1,5 +1,10 @@
 ---
-title: Hello World
+title: Live Music Locator
+layout: layout.njk
 ---
 
-Hello World
+# Welcome to Live Music Locator
+
+Find upcoming live music events in your area.
+
+[View All Events](/events/)

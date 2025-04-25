@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>{{ title or "Allgigs" }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.ico" />
-    <!-- Tailwind CSS CDN for development/demo purposes -->
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-white text-gray-900">
-    <header class="w-full py-4 bg-gray-900 text-white mb-8">
-      <div class="container mx-auto px-4">
-        <h1 class="text-3xl font-bold"><a href="/" class="hover:underline">Live Music Locator</a></h1>
-      </div>
-    </header>
-    <main class="container mx-auto px-4">
-      {{ content | safe }}
-    </main>
-    <footer class="w-full py-4 mt-12 bg-gray-100 text-center text-gray-500">
-      &copy; 2025 Live Music Locator
-    </footer>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ title or "The Locator – Local Music Events" }}</title>
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-black font-serif">
+
+  <!-- Masthead -->
+  <header class="w-full border-b border-black flex items-center justify-center py-4 bg-white">
+    <div class="flex items-center space-x-4">
+      <!-- Black-and-white SVG logo -->
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" class="h-14 w-14" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="2" width="52" height="52" rx="10" fill="white" stroke="black" stroke-width="3"/>
+        <g>
+          <circle cx="28" cy="28" r="12" stroke="black" stroke-width="2" fill="white"/>
+          <rect x="25" y="16" width="6" height="24" rx="3" fill="black"/>
+          <rect x="16" y="25" width="24" height="6" rx="3" fill="black"/>
+        </g>
+        <text x="28" y="52" text-anchor="middle" font-size="8" fill="black" font-family="serif">GIG</text>
+      </svg>
+      <span class="text-4xl font-extrabold tracking-widest uppercase select-none" style="font-family: 'Times New Roman', Times, serif;">
+        the locator
+      </span>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    {{ content | safe }}
+  </main>
+
+</body>
 </html>
