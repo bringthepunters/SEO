@@ -1,0 +1,103 @@
+1. Provision Hosting & Domain
+Description:
+– Create a Firebase project, connect livemusiclocator.com.au, deploy a “Hello World” page to verify DNS & SSL.
+Value:
+Validates that our custom domain and Firebase Hosting are configured correctly before building out content.
+
+2. Scaffold Eleventy Project
+Description:
+– Initialize a GitHub repo with Eleventy installed.
+– Add minimal structure (/src, /_site), basic .eleventy.js, and a “Hello World” template.
+– Wire up GitHub Actions to build and deploy to Firebase on push to main.
+Value:
+Establishes an automated Eleventy → Firebase pipeline, proving end-to-end build & deploy works.
+
+3. Design & Implement Site Styling
+Description:
+– Choose CSS approach (e.g. Tailwind or custom).
+– Create global layouts (header, footer, nav) and responsive styles for event listings.
+– Ensure semantic HTML and accessibility (ARIA roles, color contrast).
+Value:
+Delivers a branded, mobile-friendly UI that boosts UX and SEO performance signals.
+
+4. Define Content Structure & Routing
+Description:
+– Decide on URL patterns:
+
+/events/ (main index, with optional filters)
+
+/events/<slug>/ (individual event pages)
+– Use Eleventy collections/data files and configure firebase.json rewrites for clean URLs.
+Value:
+Provides crawlable, human-readable URLs and supports deep linking without hash fragments.
+
+5. Pull & Render Real API Data
+Description:
+– Implement events.11tydata.js to fetch from the open events API.
+– Populate templates to generate both index and detail HTML pages.
+Value:
+Replaces placeholder content with live event data each build, validating the full data-to-HTML pipeline.
+
+6. Inject JSON-LD Structured Data
+Description:
+– Enhance detail templates with <script type="application/ld+json"> using schema.org/Event.
+– Include properties: name, startDate, location.addressLocality, offers, genre, etc.
+Value:
+Enables Google’s rich event snippets and improves search visibility and click-through rates.
+
+7. Local Build & QA
+Description:
+– Document and test the local dev workflow:
+
+bash
+Copy
+Edit
+npm install
+npm run build       # Eleventy → /_site
+npx serve ./_site   # Preview locally
+– Validate HTML, CSS, JSON-LD with Google’s Rich Results Test.
+Value:
+Ensures quality before CI, reducing build failures and production regressions.
+
+8. CI on Push: Build & Deploy
+Description:
+– Configure GitHub Actions: on push to main, install deps, run Eleventy, then firebase deploy --only hosting.
+– Store Firebase token in GitHub Secrets.
+Value:
+Automates deployments for every code change, keeping the live site in sync with main.
+
+9. Add Hourly Schedule (Cron)
+Description:
+– Extend the CI workflow with:
+
+yaml
+Copy
+Edit
+on:
+  schedule:
+    - cron: '0 * * * *'  # every hour
+– Ensures a fresh rebuild and deploy from the API every hour.
+Value:
+Keeps event listings up-to-date automatically, matching real-time API data.
+
+10. Generate & Publish sitemap.xml + robots.txt
+Description:
+– During build, output a sitemap.xml listing all index & detail URLs and a minimal robots.txt referencing it.
+– Deploy them alongside the HTML.
+Value:
+Guides search engines to discover and index every page efficiently.
+
+11. Embed in Google Sites via <iframe>
+Description:
+– Provide editors with:
+
+html
+Copy
+Edit
+<iframe
+  src="https://livemusiclocator.com.au/events/"
+  width="100%" height="800" style="border:none;">
+</iframe>
+– Note any header adjustments required to allow framing.
+Value:
+Seamlessly integrates the live, SEO-optimized events listing within your existing Google Sites experience.

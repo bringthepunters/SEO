@@ -1,0 +1,60 @@
+<h1>Onboarding Checklist: Provision Hosting &amp; Domain</h1>
+<p>This checklist documents all manual steps required to provision Firebase Hosting and connect the custom domain for the Pre-rendered Event Pages for SEO project.</p>
+<h2>Story 1: Provision Hosting &amp; Domain</h2>
+<h3>1. Create Firebase Project</h3>
+<ul>
+<li>[ ] Go to <a href="https://console.firebase.google.com/">Firebase Console</a> and create a new project (e.g., &quot;Live Music Locator&quot;).</li>
+<li>[ ] Disable Google Analytics (optional).</li>
+</ul>
+<h3>2. Initialize Firebase Hosting</h3>
+<ul>
+<li>[ ] Install Firebase CLI if not already installed:<pre><code class="language-sh">npm install -g firebase-tools
+</code></pre>
+</li>
+<li>[ ] Authenticate with your Google account:<pre><code class="language-sh">firebase login
+</code></pre>
+</li>
+<li>[ ] In your project directory, initialize Firebase Hosting:<pre><code class="language-sh">firebase init hosting
+</code></pre>
+<ul>
+<li>Select the new Firebase project.</li>
+<li>Set <code>public</code> as the directory (or another directory containing your static files).</li>
+<li>Configure as a single-page app: <strong>No</strong>.</li>
+<li>Overwrite <code>index.html</code>: <strong>Yes</strong> (for initial setup).</li>
+</ul>
+</li>
+</ul>
+<h3>3. Add &quot;Hello World&quot; Page</h3>
+<ul>
+<li>[ ] Ensure <code>public/index.html</code> (or your chosen public directory) contains a minimal &quot;Hello World&quot; HTML file.</li>
+</ul>
+<h3>4. Deploy to Firebase Hosting</h3>
+<ul>
+<li>[ ] Deploy the site:<pre><code class="language-sh">firebase deploy --only hosting
+</code></pre>
+</li>
+</ul>
+<h3>5. Connect Custom Domain (livemusiclocator.com.au)</h3>
+<ul>
+<li>[ ] In the Firebase Console, go to Hosting &gt; Add custom domain.</li>
+<li>[ ] Enter <code>livemusiclocator.com.au</code> and follow the prompts.</li>
+<li>[ ] Copy the DNS verification TXT record provided by Firebase.</li>
+</ul>
+<h3>6. Update DNS Records</h3>
+<ul>
+<li>[ ] Log in to your domain registrar (where livemusiclocator.com.au is managed).</li>
+<li>[ ] Add the TXT record to verify domain ownership.</li>
+<li>[ ] Add the A records and AAAA records provided by Firebase to point the domain to Firebase Hosting.</li>
+</ul>
+<h3>7. Wait for DNS Propagation</h3>
+<ul>
+<li>[ ] Wait for DNS changes to propagate (can take up to 24 hours, but often much faster).</li>
+<li>[ ] Firebase will automatically provision an SSL certificate once DNS is correct.</li>
+</ul>
+<h3>8. Verify Deployment</h3>
+<ul>
+<li>[ ] Visit https://livemusiclocator.com.au in your browser.</li>
+<li>[ ] Confirm the &quot;Hello World&quot; page loads over HTTPS with a valid SSL certificate.</li>
+</ul>
+<hr>
+<p><strong>If you encounter issues, refer to the <a href="https://firebase.google.com/docs/hosting/custom-domain">Firebase Hosting documentation</a> for troubleshooting.</strong></p>

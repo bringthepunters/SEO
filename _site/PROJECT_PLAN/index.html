@@ -1,0 +1,74 @@
+<h1>🗺️ Project Plan: Pre-rendered Event Pages for SEO</h1>
+<h2>1. Provision Hosting &amp; Domain</h2>
+<ul>
+<li>Set up Firebase project and connect livemusiclocator.com.au.</li>
+<li>Deploy a &quot;Hello World&quot; page to verify DNS and SSL.</li>
+</ul>
+<h2>2. Scaffold Eleventy Project</h2>
+<ul>
+<li>Initialize GitHub repo with Eleventy.</li>
+<li>Add minimal structure and a basic template.</li>
+<li>Set up GitHub Actions for build and deploy to Firebase on push.</li>
+</ul>
+<h2>3. Design &amp; Implement Site Styling</h2>
+<ul>
+<li>Choose CSS approach (Tailwind or custom).</li>
+<li>Create global layouts and responsive event listing styles.</li>
+<li>Ensure semantic HTML and accessibility.</li>
+</ul>
+<h2>4. Define Content Structure &amp; Routing</h2>
+<ul>
+<li>Decide on URL patterns:
+<ul>
+<li>/events/ (main index, with filters)</li>
+<li>/events/<slug>/ (event detail pages)</li>
+</ul>
+</li>
+<li>Configure Eleventy collections and firebase.json rewrites.</li>
+</ul>
+<h2>5. Pull &amp; Render Real API Data</h2>
+<ul>
+<li>Implement Eleventy data file to fetch from the public events API.</li>
+<li>Populate templates for index and detail pages.</li>
+</ul>
+<h2>6. Inject JSON-LD Structured Data</h2>
+<ul>
+<li>Add schema.org/Event JSON-LD to detail templates.</li>
+</ul>
+<h2>7. Local Build &amp; QA</h2>
+<ul>
+<li>Document/test local dev workflow (npm install, build, preview).</li>
+<li>Validate HTML, CSS, and JSON-LD with Google’s Rich Results Test.</li>
+</ul>
+<h2>8. CI on Push: Build &amp; Deploy</h2>
+<ul>
+<li>Configure GitHub Actions to build and deploy on push to main.</li>
+<li>Store Firebase token in GitHub Secrets.</li>
+</ul>
+<h2>9. Add Hourly Schedule (Cron)</h2>
+<ul>
+<li>Extend CI workflow to run every hour (cron: '0 * * * *').</li>
+</ul>
+<h2>10. Generate &amp; Publish sitemap.xml + robots.txt</h2>
+<ul>
+<li>Output sitemap.xml and robots.txt during build.</li>
+<li>Deploy alongside HTML.</li>
+</ul>
+<h2>11. Embed in Google Sites via <iframe></h2>
+<ul>
+<li>Provide editors with iframe embed code.</li>
+<li>Adjust headers if needed to allow framing.</li>
+</ul>
+<hr>
+<h2>🧩 Dependencies &amp; Flow</h2>
+<pre><code class="language-mermaid">graph TD
+    A[Provision Hosting &amp; Domain] --&gt; B[Scaffold Eleventy Project]
+    B --&gt; C[Design &amp; Implement Site Styling]
+    B --&gt; D[Define Content Structure &amp; Routing]
+    D --&gt; E[Pull &amp; Render Real API Data]
+    E --&gt; F[Inject JSON-LD Structured Data]
+    F --&gt; G[Local Build &amp; QA]
+    G --&gt; H[CI on Push: Build &amp; Deploy]
+    H --&gt; I[Add Hourly Schedule (Cron)]
+    H --&gt; J[Generate &amp; Publish sitemap.xml + robots.txt]
+    H --&gt; K[Embed in Google Sites via iframe]</code></pre>
