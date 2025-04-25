@@ -1,0 +1,18 @@
+---
+title: "All Events"
+permalink: "events/index.html"
+---
+
+<section class="prose mx-auto">
+  <h1>All Events</h1>
+  <ul>
+    {% for event in collections.events | reverse %}
+      <li>
+        <a href="/events/{{ event.data.slug }}/">{{ event.data.title }}</a>
+        <span>({{ event.data.date }}, {{ event.data.location }})</span>
+      </li>
+    {% else %}
+      <li>No events found.</li>
+    {% endfor %}
+  </ul>
+</section>

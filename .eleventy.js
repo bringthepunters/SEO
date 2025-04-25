@@ -7,10 +7,15 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.ignores.add("stories.txt");
   eleventyConfig.ignores.add("approach.md");
 
+  // Add a collection for events
+  eleventyConfig.addCollection("events", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("events/*.md");
+  });
+
   // Optionally, set input/output directories if you want to further isolate content
   return {
     dir: {
-      input: ".",      // Project root as input
+      input: "src",    // Use /src as input directory
       output: "_site"  // Default output directory
     }
   };

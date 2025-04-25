@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Locator – Local Music Events</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-black font-serif">
+
+  <!-- Masthead (fixed height) -->
+  <header class="w-full h-24 border-b border-black flex items-center justify-center">
+    <!-- replace the src with your real masthead image path -->
+    <img src="masthead.png"
+         alt="the locator masthead"
+         class="h-full object-contain" />
+  </header>
+
+  <!-- Main content, pushed down by the header height -->
+  <main class="mt-24 max-w-7xl mx-auto px-4">
+
+    <!-- Grid: 1 col on xs, 2 on sm, 4 on md+ (exactly four days loaded) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
+      <!-- Day 1 -->
+      <section>
+        <h2 class="text-lg font-bold border-b border-black pb-2 mb-4">
+          Fri, Apr 25
+        </h2>
+        <!-- …your gigs for April 25 go here… -->
+      </section>
+
+      <!-- Day 2 -->
+      <section>
+        <h2 class="text-lg font-bold border-b border-black pb-2 mb-4">
+          Sat, Apr 26
+        </h2>
+        <!-- example gig -->
+        <article class="mb-6">
+          <h3 class="text-md font-semibold leading-snug">
+            <a href="https://www.theoldbar.com.au/gigs/free-entry-morbid-mondays-w-palliative-future-constellation-ze-wisenheimer"
+               class="underline hover:text-gray-700">
+              Morbid Mondays w/ Palliative + Future Constellation + Ze Wisenheimer
+            </a>
+          </h3>
+          <p class="text-sm italic">The Old Bar</p>
+          <p class="text-sm">20:00</p>
+          <p class="text-sm">74-76 Johnston Street Fitzroy</p>
+          <p class="text-sm uppercase tracking-wide">Genres: Rock, Indie</p>
+        </article>
+      </section>
+
+      <!-- Day 3 -->
+      <section>
+        <h2 class="text-lg font-bold border-b border-black pb-2 mb-4">
+          Sun, Apr 27
+        </h2>
+        <!-- …your gigs for April 27 go here… -->
+      </section>
+
+      <!-- Day 4 -->
+      <section>
+        <h2 class="text-lg font-bold border-b border-black pb-2 mb-4">
+          Mon, Apr 28
+        </h2>
+        <!-- …your gigs for April 28 go here… -->
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>
