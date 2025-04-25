@@ -60,7 +60,7 @@ module.exports = async function () {
     dayKeys: days,
     days: days.map(d => ({
       date: d,
-      label: new Date(d).toLocaleDateString("en-AU", { weekday: "short", month: "short", day: "numeric", year: "numeric" })
+      label: new Date(d).toLocaleDateString("en-AU", { weekday: "long", month: "short", day: "numeric", year: "numeric" })
     }))
   };
 };
