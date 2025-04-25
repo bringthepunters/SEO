@@ -4,39 +4,39 @@ permalink: "events/index.html"
 layout: layout.njk
 ---
 
-<!-- 4-column grid -->
+<!-- 4-column grid: one day per column, today + next 3 days -->
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-l border-r border-black">
 
-  <!-- Show events or placeholder empty event -->
-  {% if collections.events.length > 0 %}
-    {% for event in collections.events | reverse %}
+  {% for day in days %}
     <section class="border-l border-black pl-4">
-      <!-- Use date from event -->
       <h2 class="text-lg font-bold border-b border-black pb-2 mb-4 uppercase tracking-wide">
-        Event Date
+        {{ day.label | safe }}
       </h2>
-      <article class="mb-8">
-        <h3 class="text-xl font-bold leading-snug mb-1">
-          <a href="/events/{{ event.data.slug }}/" class="underline hover:text-gray-700">
-            {{ event.data.title }}
-          </a>
-        </h3>
-        <p class="text-sm italic">{{ event.data.location }}</p>
-        <p class="text-sm">{{ event.data.date }}</p>
-        <div class="flex flex-wrap gap-2 mt-2">
-          <span class="bg-black text-white text-xs px-2 py-0.5 rounded-full uppercase tracking-wide">Sample</span>
-          <span class="bg-black text-white text-xs px-2 py-0.5 rounded-full uppercase tracking-wide">Event</span>
-        </div>
-      </article>
+      {% set events = eventsByDate[day.date] %}
+      {% if events and events.length > 0 %}
+        {% for event in events %}
+          <article class="mb-8">
+            <h3 class="text-xl font-bold leading-snug mb-1">
+              <a href="{{ event.ticket_link }}" class="underline hover:text-gray-700" target="_blank" rel="noopener">
+                {{ event.name }}
+              </a>
+            </h3>
+            <p class="text-sm italic">{{ event.venue }}</p>
+            <p class="text-sm">{{ event.start_time ? event.start_time.split('T')[1]?.slice(0,5) : '' }}</p>
+            <p class="text-sm">{{ event.address }}</p>
+            <div class="flex flex-wrap gap-2 mt-2">
+              {% for genre in event.genres %}
+                <span class="bg-black text-white text-xs px-2 py-0.5 rounded-full uppercase tracking-wide">{{ genre }}</span>
+              {% endfor %}
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <article class="mb-8">
+          <p class="text-sm">No events scheduled.</p>
+        </article>
+      {% endif %}
     </section>
-    {% endfor %}
-  {% else %}
-    <section class="border-l border-black pl-4">
-      <h2 class="text-lg font-bold border-b border-black pb-2 mb-4 uppercase tracking-wide">No Events</h2>
-      <article class="mb-8">
-        <p class="text-sm">No events have been scheduled yet.</p>
-      </article>
-    </section>
-  {% endif %}
+  {% endfor %}
 
 </div>
