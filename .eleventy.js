@@ -9,7 +9,7 @@ module.exports = function(eleventyConfig) {
 
   // Add a collection for events
   eleventyConfig.addCollection("events", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("./events/*.md");
+    return collectionApi.getFilteredByGlob("events/*.md");
   });
 
   // Optionally, set input/output directories if you want to further isolate content

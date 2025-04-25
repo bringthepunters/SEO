@@ -1,3 +1,5 @@
+{% extends "layout.njk" %}
+{% block content %}
 <article class="prose mx-auto">
   <h1>{{ title }}</h1>
   <p><strong>Date:</strong> {{ date }}</p>
@@ -8,3 +10,4 @@
   </div>
   <p><a href="/events/">Back to all events</a></p>
 </article>
+{% endblock %}

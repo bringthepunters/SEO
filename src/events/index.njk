@@ -1,18 +1,27 @@
 ---
 title: "All Events"
 permalink: "events/index.html"
+layout: layout.njk
 ---
 
-<section class="prose mx-auto">
-  <h1>All Events</h1>
-  <ul>
-    {% for event in collections.events | reverse %}
-      <li>
-        <a href="/events/{{ event.data.slug }}/">{{ event.data.title }}</a>
-        <span>({{ event.data.date }}, {{ event.data.location }})</span>
-      </li>
-    {% else %}
-      <li>No events found.</li>
-    {% endfor %}
-  </ul>
+<section>
+  <h1 class="text-3xl font-bold mb-8">All Events</h1>
+  {% if collections.events.length > 0 %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for event in collections.events | reverse %}
+        <div class="border rounded-lg p-4 bg-white shadow hover:shadow-lg transition">
+          <h2 class="text-xl font-semibold mb-2">
+            <a href="/events/{{ event.data.slug }}/" class="hover:underline text-blue-700">{{ event.data.title }}</a>
+          </h2>
+          <div class="text-gray-600 text-sm mb-1">
+            <span>{{ event.data.date }}</span> &middot; <span>{{ event.data.location }}</span>
+          </div>
+          <p class="text-gray-800 mb-2">{{ event.data.description }}</p>
+          <a href="/events/{{ event.data.slug }}/" class="text-blue-600 hover:underline text-sm">View details &rarr;</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="text-center text-gray-500 py-12 text-lg">No events found.</div>
+  {% endif %}
 </section>
