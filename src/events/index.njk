@@ -22,7 +22,7 @@ layout: layout.njk
               </a>
             </h3>
             <p class="text-sm italic">{{ event.venue }}</p>
-            <p class="text-sm">{{ event.start_time ? event.start_time.split('T')[1]?.slice(0,5) : '' }}</p>
+            <p class="text-sm">{{ event.formatted_time }}</p>
             <p class="text-sm">{{ event.address }}</p>
             <div class="flex flex-wrap gap-2 mt-2">
               {% for genre in event.genres %}
