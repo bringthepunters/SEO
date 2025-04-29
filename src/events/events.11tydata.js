@@ -94,6 +94,7 @@ module.exports = async function () {
       }
       return {
         name: event.name || "",
+        id: event.id || "",
         slug,
         ticket_link: event.ticketing_url || "",
         venue: event.venue?.name || "",
