@@ -10,14 +10,15 @@ layout: layout.njk
 
   {% for day in days %}
     <section class="border-l border-black pl-4">
-      <h2 class="text-lg font-bold border-b border-black pb-2 mb-4 uppercase tracking-wide">
-        {{ day.label | safe }}
+      <h2 class="text-[1.26rem] font-bold border-b border-black pb-2 mb-4 uppercase tracking-wide" style="font-size: 1.26rem;">
+        {# Remove year from label #}
+        {{ day.label | replace(" 2025", "") | safe }}
       </h2>
       {% set locGroups = eventsByDateLocality[day.date] %}
       {% if locGroups and locGroups.length > 0 %}
         {% for group in locGroups %}
           <div class="mb-4">
-            <h3 class="text-base font-serif font-semibold uppercase tracking-wide border-b border-gray-400 pb-1 mb-2" style="font-family: 'Times New Roman', Times, serif; letter-spacing: 0.04em;">
+            <h3 class="text-base font-serif font-semibold uppercase tracking-wide border-t border-b border-gray-400 pt-1 pb-1 mb-2" style="font-family: 'Times New Roman', Times, serif; letter-spacing: 0.04em;">
               {{ group.locality }}
             </h3>
             {% for event in group.events %}
@@ -41,9 +42,37 @@ layout: layout.njk
                 <p class="text-xs mb-0.5">{{ event.address }}</p>
                 <div class="flex flex-wrap gap-1 mt-1">
                   {% for genre in event.genres %}
-                    <span class="bg-black text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wide">{{ genre }}</span>
+                    <a href="/genre/{{ genre | slug }}/" class="italic text-xs text-black hover:underline" style="font-style: italic; background: none; border: none; padding: 0; margin: 0 0.25em 0 0; text-transform: none;">
+                      <em>{{ genre }}</em>
+                    </a>
                   {% endfor %}
                 </div>
+              {# SEO: Event ld+json schema markup #}
+              <script type="application/ld+json">
+              {
+                "@context": "https://schema.org",
+                "@type": "Event",
+                "name": {{ event.name | dump }},
+                "startDate": {{ event.start_time | dump }},
+                "location": {
+                  "@type": "Place",
+                  "name": {{ event.venue | dump }},
+                  "address": {{ event.address | dump }}
+                },
+                "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+                "eventStatus": "https://schema.org/EventScheduled",
+                "url": "https://allgigs-ae406.web.app/events/{{ event.slug }}/",
+                "description": {{ event.information | dump }},
+                "offers": {
+                  "@type": "Offer",
+                  "url": {{ event.ticket_link | dump }},
+                  "price": {{ event.price | dump }},
+                  "priceCurrency": "AUD",
+                  "availability": "https://schema.org/InStock"
+                },
+                "genre": [{% for genre in event.genres %}{{ genre | dump }}{% if not loop.last %}, {% endif %}{% endfor %}]
+              }
+              </script>
               </article>
               {% if not loop.last %}
                 <div class="border-t border-gray-300 my-2" style="border-width:0.5px"></div>

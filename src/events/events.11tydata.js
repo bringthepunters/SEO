@@ -55,12 +55,28 @@ module.exports = async function () {
     events = (Array.isArray(data) ? data : []).map(event => {
       // Extract postcode from address (4 consecutive digits)
       let postcode = '';
+      let locality = '';
       if (event.venue?.address) {
-        const match = event.venue.address.match(/\b\d{4}\b/);
-        if (match) postcode = match[0];
+        // Try to extract postcode (4 digits at end of string)
+        const match = event.venue.address.match(/(\d{4})(?!.*\d{4})/);
+        if (match) postcode = match[1];
+        // Map postcode to locality
+        if (postcodeToLocality[postcode]) {
+          locality = postcodeToLocality[postcode];
+        } else {
+          // Fallback: try to extract locality name from address (e.g., "Fitzroy VIC 3065" or "Fitzroy 3065")
+          const locMatch = event.venue.address.match(/,\s*([A-Za-z\s]+)\s+VIC\s*\d{4}/i) ||
+                           event.venue.address.match(/,\s*([A-Za-z\s]+)\s+\d{4}/i) ||
+                           event.venue.address.match(/([A-Za-z\s]+)\s+VIC\s*\d{4}/i) ||
+                           event.venue.address.match(/([A-Za-z\s]+)\s+\d{4}/i);
+          if (locMatch && locMatch[1]) {
+            locality = locMatch[1].trim().toUpperCase();
+          }
+        }
       }
-      // Map postcode to locality
-      let locality = postcodeToLocality[postcode] || '';
+      if (!locality) {
+        locality = "Other";
+      }
       // Generate a base slug from the event name
       let baseSlug = (event.name || "")
         .toLowerCase()
