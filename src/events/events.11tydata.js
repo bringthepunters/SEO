@@ -11,8 +11,30 @@ function getMelbourneDate(offset = 0) {
   return local.toISOString().split("T")[0];
 }
 
+const fs = require('fs');
+const path = require('path');
+
 module.exports = async function () {
   const fetch = (await import('node-fetch')).default;
+
+  // --- Load and parse loc-postcodes.csv ---
+  const postcodeToLocality = {};
+  try {
+    const csvPath = path.join(__dirname, '..', '..', 'loc-postcodes.csv');
+    const csvData = fs.readFileSync(csvPath, 'utf8');
+    const lines = csvData.split('\n').map(l => l.trim()).filter(Boolean);
+    // Skip header, handle possible quotes
+    for (let i = 1; i < lines.length; i++) {
+      const [postcodeRaw, ...localityParts] = lines[i].split(',');
+      const postcode = postcodeRaw.replace(/[^0-9]/g, '');
+      const locality = localityParts.join(',').replace(/(^"|"$)/g, '').trim();
+      if (postcode && locality) {
+        postcodeToLocality[postcode] = locality;
+      }
+    }
+  } catch (err) {
+    console.error("Failed to read loc-postcodes.csv:", err);
+  }
 
   // Get today and the next 3 days in Melbourne time
   const days = [0, 1, 2, 3].map(getMelbourneDate);
@@ -31,6 +53,14 @@ module.exports = async function () {
     // Track slugs to ensure uniqueness
     const slugCounts = {};
     events = (Array.isArray(data) ? data : []).map(event => {
+      // Extract postcode from address (4 consecutive digits)
+      let postcode = '';
+      if (event.venue?.address) {
+        const match = event.venue.address.match(/\b\d{4}\b/);
+        if (match) postcode = match[0];
+      }
+      // Map postcode to locality
+      let locality = postcodeToLocality[postcode] || '';
       // Generate a base slug from the event name
       let baseSlug = (event.name || "")
         .toLowerCase()
@@ -61,6 +91,8 @@ module.exports = async function () {
         information: event.information || "",
         price: event.price || "",
         sets: event.sets || [],
+        locality,
+        postcode,
         raw: event
       };
     });
@@ -68,20 +100,34 @@ module.exports = async function () {
     console.error("Failed to fetch events from lml.live API:", err);
   }
 
-  // Group events by date (YYYY-MM-DD)
+  // Group events by date (YYYY-MM-DD) and then by locality
   const eventsByDate = {};
   for (const d of days) {
-    eventsByDate[d] = [];
+    eventsByDate[d] = {};
   }
   for (const event of events) {
     if (eventsByDate[event.date]) {
-      eventsByDate[event.date].push(event);
+      const loc = event.locality || "Other";
+      if (!eventsByDate[event.date][loc]) {
+        eventsByDate[event.date][loc] = [];
+      }
+      eventsByDate[event.date][loc].push(event);
     }
   }
 
-  // Return both the grouped events and the day keys (for column order)
+  // For each day, create an array of { locality, events } sorted by locality name
+  const eventsByDateLocality = {};
+  for (const d of days) {
+    const locs = Object.keys(eventsByDate[d]).sort((a, b) => a.localeCompare(b));
+    eventsByDateLocality[d] = locs.map(loc => ({
+      locality: loc,
+      events: eventsByDate[d][loc]
+    }));
+  }
+
+  // Return grouped events by date and locality, and the day keys (for column order)
   return {
-    eventsByDate,
+    eventsByDateLocality,
     dayKeys: days,
     days: days.map(d => ({
       date: d,
