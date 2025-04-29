@@ -54,5 +54,32 @@ This checklist documents all manual steps required to provision Firebase Hosting
 - [ ] Confirm the "Hello World" page loads over HTTPS with a valid SSL certificate.
 
 ---
+## Local Build & QA Workflow
+
+Follow these steps to build and test the site locally before deploying:
+
+1. **Install dependencies**
+   ```sh
+   npm install
+   ```
+
+2. **Build the static site with Eleventy**
+   ```sh
+   npm run build
+   ```
+   - Output will be generated in the `/_site` directory.
+
+3. **Preview the site locally**
+   ```sh
+   npx serve ./_site
+   ```
+   - By default, the site will be available at [http://localhost:3000](http://localhost:3000) (or another port if 3000 is in use).
+
+4. **Validate HTML, CSS, and JSON-LD**
+   - Open [Google’s Rich Results Test](https://search.google.com/test/rich-results).
+   - Enter your local server URL (e.g., `http://localhost:3000`) or upload an HTML file from the `/_site` directory.
+   - Check for errors or warnings in the results.
+
+**Tip:** Run these steps before every deployment to catch issues early and ensure high-quality output.
 
 **If you encounter issues, refer to the [Firebase Hosting documentation](https://firebase.google.com/docs/hosting/custom-domain) for troubleshooting.**
