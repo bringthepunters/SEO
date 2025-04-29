@@ -78,6 +78,8 @@ module.exports = function(eleventyConfig) {
     // Return as array for pagination/templates
     return Object.values(genreMap);
   });
+// Ensure logo.png is copied to the site root for correct referencing
+  eleventyConfig.addPassthroughCopy({ "public/logo.png": "logo.png" });
 
   // Optionally, set input/output directories if you want to further isolate content
   return {
