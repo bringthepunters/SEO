@@ -28,18 +28,42 @@ module.exports = async function () {
     const data = await response.json();
 
     // API returns an array of event objects
-    events = (Array.isArray(data) ? data : []).map(event => ({
-      name: event.name || "",
-      ticket_link: event.ticketing_url || "",
-      venue: event.venue?.name || "",
-      venue_location_url: event.venue?.location_url || "",
-      address: event.venue?.address || "",
-      start_time: event.start_time || "",
-      formatted_time: event.start_time || "",
-      genres: event.genre_tags || [],
-      date: event.date || "",
-      raw: event
-    }));
+    // Track slugs to ensure uniqueness
+    const slugCounts = {};
+    events = (Array.isArray(data) ? data : []).map(event => {
+      // Generate a base slug from the event name
+      let baseSlug = (event.name || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+      // Append start_time to ensure uniqueness
+      const timePart = event.start_time ? "-" + event.start_time.replace(/[^0-9a-zA-Z]/g, "") : "";
+      let slug = baseSlug + timePart;
+      // If still not unique, append a count
+      if (slugCounts[slug]) {
+        slugCounts[slug]++;
+        slug += "-" + slugCounts[slug];
+      } else {
+        slugCounts[slug] = 1;
+      }
+      return {
+        name: event.name || "",
+        slug,
+        ticket_link: event.ticketing_url || "",
+        venue: event.venue?.name || "",
+        venue_location_url: event.venue?.location_url || "",
+        address: event.venue?.address || "",
+        start_time: event.start_time || "",
+        end_time: event.end_time || "",
+        formatted_time: event.start_time || "",
+        genres: event.genre_tags || [],
+        date: event.date || "",
+        information: event.information || "",
+        price: event.price || "",
+        sets: event.sets || [],
+        raw: event
+      };
+    });
   } catch (err) {
     console.error("Failed to fetch events from lml.live API:", err);
   }

@@ -12,6 +12,21 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/events/*.md");
   });
 
+  // Add a collection for all API events (for detail pages)
+  eleventyConfig.addCollection("allEvents", async function(collectionApi) {
+    // Import the event data from the 11ty data file
+    const eventsData = require("./src/events/events.11tydata.js");
+    const data = await eventsData();
+    // Flatten all events into a single array
+    let all = [];
+    for (const day of data.dayKeys) {
+      if (data.eventsByDate[day]) {
+        all = all.concat(data.eventsByDate[day]);
+      }
+    }
+    return all;
+  });
+
   // Optionally, set input/output directories if you want to further isolate content
   return {
     addAllPagesToCollections: true,

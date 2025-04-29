@@ -1,0 +1,97 @@
+---
+pagination:
+  data: collections.allEvents
+  size: 1
+  alias: event
+permalink: "events/{{ event.slug }}/index.html"
+layout: layout.njk
+---
+
+{#-- JSON-LD Structured Data for SEO --#}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "{{ event.name | escape }}",
+  "startDate": "{{ event.date }}T{{ event.start_time | default('00:00') }}+10:00"{% if event.end_time %},
+  "endDate": "{{ event.date }}T{{ event.end_time | default('00:00') }}+10:00"{% endif %},
+  "description": "{{ event.description | escape }}",
+  "location": {
+    "@type": "Place",
+    "name": "{{ event.venue | escape }}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Melbourne",
+      "streetAddress": "{{ event.address | escape }}"
+    }
+  }{% if event.ticket_link %},
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ event.ticket_link }}"{% if event.price %},
+    "price": "{{ event.price }}"{% endif %}{% if event.information and 'free' in event.information | lower %},
+    "price": "0",
+    "priceCurrency": "AUD",
+    "availability": "https://schema.org/InStock"{% endif %}
+  }{% endif %}{% if event.genres and event.genres.length > 0 %},
+  "genre": [{% for genre in event.genres %}"{{ genre }}"{% if not loop.last %}, {% endif %}{% endfor %}]{% endif %},
+  "url": "{{ page.url | url }}"{% if event.sets and event.sets.length > 0 %},
+  "performer": [{% for set in event.sets %}{"@type": "PerformingGroup", "name": "{{ set.artist or set.name }}"}{% if not loop.last %}, {% endif %}{% endfor %}]{% endif %},
+  "organizer": {
+    "@type": "Organization",
+    "name": "{{ event.venue | escape }}"
+  }
+}
+</script>
+
+<div class="max-w-3xl mx-auto">
+  <section class="border-l border-r border-black px-8 py-6">
+    <h1 class="text-3xl font-bold border-b border-black pb-2 mb-4">{{ event.name }}</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div>
+        <p class="text-lg font-bold">{{ event.formatted_time }}</p>
+        <p class="text-lg italic">{{ event.venue }}</p>
+        <p class="text-sm">{{ event.address }}</p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          {% for genre in event.genres %}
+            <span class="bg-black text-white text-xs px-2 py-0.5 rounded-full uppercase tracking-wide">{{ genre }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      <div>
+        <p class="font-bold">About this event:</p>
+        <p>{{ event.information }}</p>
+        <p>{{ event.description }}</p>
+        {% if event.price %}
+          <p class="mt-2"><span class="font-bold">Price:</span> {{ event.price }}</p>
+        {% endif %}
+        {% if event.ticket_link %}
+          <p class="mt-2"><a href="{{ event.ticket_link }}" class="underline hover:text-gray-700" target="_blank" rel="noopener">Get Tickets</a></p>
+        {% endif %}
+      </div>
+    </div>
+    {% if event.sets and event.sets.length > 0 %}
+      <div class="mt-4">
+        <p class="font-bold">Acts:</p>
+        <ul class="list-disc list-inside">
+          {% for set in event.sets %}
+            <li>{{ set.artist or set.name }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    <div class="mt-8 border-t border-black pt-4">
+      <a href="/events/" class="underline hover:text-gray-700">&larr; Back to all events</a>
+    </div>
+    <div class="mt-8">
+      <iframe
+        width="100%"
+        height="300"
+        frameborder="0"
+        style="border:0"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q={{ event.address | urlencode }}&output=embed"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+</div>

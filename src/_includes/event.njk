@@ -1,5 +1,35 @@
 {% extends "layout.njk" %}
 {% block content %}
+  {#-- JSON-LD Structured Data for SEO --#}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "{{ title | default('') }}",
+    "startDate": "{{ date | default('') }}",
+    "description": "{{ description | escape }}",
+    "location": {
+      "@type": "Place",
+      "name": "{{ location | default('') }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Melbourne",
+        "streetAddress": ""
+      }
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "",
+      "price": ""
+    },
+    "genre": [],
+    "url": "",
+    "organizer": {
+      "@type": "Organization",
+      "name": "{{ location | default('') }}"
+    }
+  }
+  </script>
 <div class="max-w-3xl mx-auto">
   <section class="border-l border-r border-black px-8 py-6">
     <h1 class="text-3xl font-bold border-b border-black pb-2 mb-4">{{ title }}</h1>

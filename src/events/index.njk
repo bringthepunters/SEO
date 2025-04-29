@@ -3,6 +3,7 @@ title: "All Events"
 permalink: "events/index.html"
 layout: layout.njk
 ---
+<!-- DEBUG: allEvents collection length: {{ collections.allEvents | length }} -->
 
 <!-- 4-column grid: one day per column, today + next 3 days -->
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-l border-r border-black">
@@ -16,10 +17,11 @@ layout: layout.njk
       {% if events and events.length > 0 %}
         {% for event in events %}
           <article class="mb-8">
-            <h3 class="text-xl font-bold leading-snug mb-1">
-              <a href="{{ event.ticket_link }}" class="hover:text-gray-700 focus:text-gray-700 transition-colors" style="text-decoration: none;">
+            <h3 class="text-xl font-bold leading-snug mb-1 flex items-center">
+              <a href="/events/{{ event.slug }}/" class="hover:text-gray-700 focus:text-gray-700 transition-colors" style="text-decoration: none;">
                 {{ event.name }}
               </a>
+              <a href="/events/{{ event.slug }}/" class="ml-2 text-2xl font-serif" aria-label="View event details" style="font-family: 'Times New Roman', Times, serif;">&#8594;</a>
             </h3>
             <p class="text-sm italic">
               {% if event.venue_location_url %}
