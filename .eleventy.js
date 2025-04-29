@@ -80,6 +80,9 @@ module.exports = function(eleventyConfig) {
   });
 // Ensure logo.png is copied to the site root for correct referencing
   eleventyConfig.addPassthroughCopy({ "public/logo.png": "logo.png" });
+  
+  // Copy Google Search Console verification file to site root
+  eleventyConfig.addPassthroughCopy({ "googlea29830ca421c283c.html": "googlea29830ca421c283c.html" });
 
   // Optionally, set input/output directories if you want to further isolate content
   return {

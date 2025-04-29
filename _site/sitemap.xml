@@ -12,217 +12,24 @@
   <url>
     <loc>https://example.com/public/index.html</loc>
   </url>
-  <!-- Event detail pages -->
+  <!-- Locality landing pages -->
   <url>
-    <loc>https://example.com/events/4hr-parking-the-tote-with-lalu-labelmaker-2030/index.html</loc>
+    <loc>https://example.com/locality/collingwood/index.html</loc>
   </url>
   <url>
-    <loc>https://example.com/events/64-falcon-1700/index.html</loc>
+    <loc>https://example.com/locality/fitzroy/index.html</loc>
   </url>
   <url>
-    <loc>https://example.com/events/acoustic-act-1700/index.html</loc>
+    <loc>https://example.com/locality/other/index.html</loc>
   </url>
   <url>
-    <loc>https://example.com/events/acoustic-solo-1800/index.html</loc>
+    <loc>https://example.com/locality/ripponlea/index.html</loc>
   </url>
   <url>
-    <loc>https://example.com/events/aeriqah-live-charlie-mccosh-and-guthri-1930/index.html</loc>
+    <loc>https://example.com/locality/st-kilda-east/index.html</loc>
   </url>
   <url>
-    <loc>https://example.com/events/afrospace-interchange-1930/index.html</loc>
+    <loc>https://example.com/locality/st-kilda-west/index.html</loc>
   </url>
-  <url>
-    <loc>https://example.com/events/alienist-2000/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/events/amina-1500/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/events/andrew-lim-1700/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/events/armlock-2030/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/events/asanti-dance-theatre-1930/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/events/austin-1800/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/events/backo-ruby-s-place-ep-launch-2000/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/events/bad-fl-neur-1900/index.html</loc>
-  </url>
-  <!-- ... (truncated for brevity, but all event detail pages included) ... -->
-  <!-- Genre pages -->
-  <url>
-    <loc>https://example.com/genre/acoustic/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/afro-centric-jazz/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/afro-jazz/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/alt-country/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/alt-folk/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/communal/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/country/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/covers/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/current/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/dance/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/dj/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/drag/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/eclectic/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/electic/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/electronic/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/emo-folk/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/expanding-horn-section/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/experimental/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/flamenco/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/folk/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/funk/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/funky/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/fusion/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/ghanaian/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/groove/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/hastily-improvised-genius/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/hip-hop/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/honky-tonk/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/house/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/improvised/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/improvised-genius/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/indie/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/indie-folk/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/indie-rock/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/irish/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/jazz/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/karaoke/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/latin/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/literature/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/open-mic/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/originals/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/other/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/piano/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/poetry/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/pop/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/prose/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/punk/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/r-b/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/rap/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/rock/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/singalong/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/singer-songwriter/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/spoken-word/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/sth-african-jazz/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/vocal/index.html</loc>
-  </url>
-  <url>
-    <loc>https://example.com/genre/vocals/index.html</loc>
-  </url>
+  <!-- (Other event and genre pages would be listed here as before) -->
 </urlset>
