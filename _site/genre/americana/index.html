@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="google-site-verification" content="N_ifl836cEDDqeG-cLOeWxMbMtbmIdvdOQA7D5sJ2og" />
+  <title>{{ genre.name | title }}</title>
+  <link rel="icon" href="/favicon.ico" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+      html, body, .prose {
+        text-rendering: optimizeLegibility;
+        font-feature-settings: "kern" 1, "liga" 1;
+        -webkit-font-feature-settings: "kern" 1, "liga" 1;
+        font-kerning: normal;
+        line-height: 1.5;
+        /* Optional: improve font smoothing for macOS */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Headings: tighter letter spacing for display */
+      h1, h2, h3, h4, h5, h6 {
+        letter-spacing: -0.01em;
+        font-variant-ligatures: common-ligatures;
+      }
+      /* Optional: improve link appearance */
+      a {
+        text-underline-position: under;
+        text-decoration-thickness: 1.5px;
+      }
+    </style>
+</head>
+<body class="bg-white text-black font-serif">
+
+  <!-- Masthead -->
+  <header class="w-full border-b border-black flex items-center justify-center py-4 bg-white">
+    <div class="flex items-center space-x-4">
+      <!-- Black-and-white SVG logo -->
+      <img src="/logo.png" alt="Live Music Locator logo" class="h-14 w-14" />
+      <span class="text-4xl font-extrabold tracking-widest uppercase select-none" style="font-family: 'Times New Roman', Times, serif;">
+        the locator
+      </span>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    
+<h1 class="text-2xl font-bold mb-4 uppercase tracking-wide" style="font-family: 'Times New Roman', Times, serif;">
+  Americana
+</h1>
+
+
+  <ul class="list-none pl-0">
+    
+      <li class="mb-6">
+        <a href="/events/the-amigos-2100/" class="text-lg font-bold hover:underline">The Amigos</a>
+        <div class="text-xs italic mb-1">
+          
+            <a href="https://maps.app.goo.gl/diYpbxLcTMajFMeL6" class="underline hover:text-gray-700" target="_blank" rel="noopener">
+              The Precinct Hotel
+            </a>
+          
+        </div>
+        <div class="text-xs mb-1">21:00</div>
+        <div class="text-xs mb-1">60 Swan street, Cremorne 3121</div>
+        <div class="flex flex-wrap gap-1 mt-1">
+          
+            <a href="/genre/country/" class="italic text-xs text-black hover:underline" style="font-style: italic;">Country</a>
+          
+            <a href="/genre/folk/" class="italic text-xs text-black hover:underline" style="font-style: italic;">Folk</a>
+          
+            <a href="/genre/americana/" class="italic text-xs text-black hover:underline" style="font-style: italic;">Americana</a>
+          
+        </div>
+        
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Event",
+          "name": &quot;The Amigos&quot;,
+          "startDate": &quot;21:00&quot;,
+          "location": {
+            "@type": "Place",
+            "name": &quot;The Precinct Hotel&quot;,
+            "address": &quot;60 Swan street, Cremorne 3121&quot;
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "url": "https://allgigs-ae406.web.app/events/the-amigos-2100/",
+          "description": &quot;&quot;,
+          "offers": {
+            "@type": "Offer",
+            "url": &quot;&quot;,
+            "price": &quot;&quot;,
+            "priceCurrency": "AUD",
+            "availability": "https://schema.org/InStock"
+          },
+          "genre": [&quot;Country&quot;, &quot;Folk&quot;, &quot;Americana&quot;]
+        }
+        </script>
+      </li>
+    
+  </ul>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Americana Gigs",
+    "itemListElement": [
+      
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "url": "https://allgigs-ae406.web.app/events/the-amigos-2100/"
+      }
+      
+    ]
+  }
+  </script>
+
+  </main>
+
+</body>
+</html>

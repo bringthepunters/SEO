@@ -84,6 +84,29 @@ module.exports = function(eleventyConfig) {
   // Copy Google Search Console verification file to site root
   eleventyConfig.addPassthroughCopy({ "googlea29830ca421c283c.html": "googlea29830ca421c283c.html" });
 
+  // Add a filter to humanize dates in Melbourne timezone
+  const { DateTime } = require("luxon");
+  eleventyConfig.addFilter("humanDateLabel", function(dateString) {
+    // Parse date in Melbourne timezone
+    const melTz = "Australia/Melbourne";
+    const now = DateTime.now().setZone(melTz).startOf("day");
+    const date = DateTime.fromISO(dateString, { zone: melTz }).startOf("day");
+    const diff = date.diff(now, "days").toObject().days;
+
+    // "tonight" = today, "tomorrow" = tomorrow
+    if (diff === 0) return "tonight";
+    if (diff === 1) return "tomorrow";
+
+    // "this weekend" = next Fri/Sat/Sun
+    const weekday = date.weekday; // 5=Fri, 6=Sat, 7=Sun
+    const isThisWeekend = (weekday >= 5 && weekday <= 7) &&
+      (date >= now && date <= now.plus({ days: 6 }));
+    if (isThisWeekend) return "this weekend";
+
+    // Otherwise, return formatted date (e.g., "Wed 30 Apr")
+    return date.toFormat("ccc d LLL");
+  });
+
   // Optionally, set input/output directories if you want to further isolate content
   return {
     addAllPagesToCollections: true,

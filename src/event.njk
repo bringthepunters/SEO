@@ -46,10 +46,18 @@ layout: layout.njk
 <div class="max-w-3xl mx-auto">
   <section class="border-l border-r border-black px-8 py-6">
     <h1 class="text-3xl font-bold border-b border-black pb-2 mb-4">
+      Live Music
+      {{ event.date | humanDateLabel }}
+      {% if event.genres and event.genres.length > 0 %}
+        {{ event.genres | join(", ") }}
+      {% endif %}
+      {{ event.locality }}
+    </h1>
+    <div class="text-lg font-bold mb-2">
       <a href="https://lml.live/gigs/{{ event.id }}" target="_blank" rel="noopener">
         {{ event.name }}
       </a>
-    </h1>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       <div>
         <p class="text-lg font-bold">{{ event.formatted_time }}</p>

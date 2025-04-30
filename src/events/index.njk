@@ -11,8 +11,9 @@ layout: layout.njk
   {% for day in days %}
     <section class="border-l border-black pl-4">
       <h2 class="text-[1.26rem] font-bold border-b border-black pb-2 mb-4 uppercase tracking-wide" style="font-size: 1.26rem;">
-        {# Remove year from label #}
-        {{ day.label | replace(" 2025", "") | safe }}
+        <a href="/events/date/{{ day.date }}/" class="hover:underline">
+          {{ day.date | humanDateLabel }}
+        </a>
       </h2>
       {% set locGroups = eventsByDateLocality[day.date] %}
       {% if locGroups and locGroups.length > 0 %}

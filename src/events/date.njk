@@ -1,0 +1,38 @@
+---
+pagination:
+  data: collections.date
+  size: 1
+  alias: datePage
+permalink: "{{ datePage.permalink }}"
+layout: layout.njk
+---
+
+{# H1: "Live Music" <humanized date> (Melbourne) #}
+<h1 class="text-3xl font-bold mb-6">
+  Live Music {{ datePage.date | humanDateLabel }} <span class="text-lg font-normal">(Melbourne)</span>
+</h1>
+
+{% if datePage.eventsByLocality.length %}
+  {% for group in datePage.eventsByLocality %}
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">{{ group.locality }}</h2>
+      {% for event in group.events %}
+        <article class="mb-4">
+          <h3 class="text-lg font-bold">
+            <a href="/events/{{ event.slug }}/" class="hover:underline">{{ event.name }}</a>
+          </h3>
+          <div class="text-sm mb-1">
+            {% for genre in event.genres %}
+              <span class="inline-block bg-gray-200 rounded px-2 py-0.5 mr-1">{{ genre }}</span>
+            {% endfor %}
+          </div>
+          <div class="text-xs text-gray-700">
+            {{ event.venue }} | {{ event.formatted_time }} | {{ event.address }}
+          </div>
+        </article>
+      {% endfor %}
+    </section>
+  {% endfor %}
+{% else %}
+  <p>No events scheduled for this date.</p>
+{% endif %}
