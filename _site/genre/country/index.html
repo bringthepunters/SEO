@@ -35,20 +35,23 @@
 
   <!-- Masthead -->
   <header class="w-full border-b border-black flex items-center justify-center py-4 bg-white">
-    <div class="flex items-center space-x-4">
+    <a href="/events/" class="flex items-center space-x-4 hover:opacity-80" style="text-decoration: none;">
       <!-- Black-and-white SVG logo -->
       <img src="/logo.png" alt="Live Music Locator logo" class="h-14 w-14" />
       <span class="text-4xl font-extrabold tracking-widest uppercase select-none" style="font-family: 'Times New Roman', Times, serif;">
         the locator
       </span>
-    </div>
+    </a>
   </header>
 
   <!-- Main content -->
   <main class="max-w-7xl mx-auto px-4 py-8">
     
 <h1 class="text-2xl font-bold mb-4 uppercase tracking-wide" style="font-family: 'Times New Roman', Times, serif;">
+  Live Music
+  tonight
   Country
+  <span class="text-lg font-normal">(Melbourne)</span>
 </h1>
 
 
@@ -145,6 +148,50 @@
       </li>
     
       <li class="mb-6">
+        <a href="/events/nashville-fridays-1900/" class="text-lg font-bold hover:underline">Nashville Fridays</a>
+        <div class="text-xs italic mb-1">
+          
+            <a href="https://maps.app.goo.gl/YAyaGjYzkrJunfgT7" class="underline hover:text-gray-700" target="_blank" rel="noopener">
+              Hotel Esplanade- The Basement
+            </a>
+          
+        </div>
+        <div class="text-xs mb-1">19:00</div>
+        <div class="text-xs mb-1">11 The Esplanade, St Kilda VIC 3182</div>
+        <div class="flex flex-wrap gap-1 mt-1">
+          
+            <a href="/genre/country/" class="italic text-xs text-black hover:underline" style="font-style: italic;">Country</a>
+          
+        </div>
+        
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Event",
+          "name": &quot;Nashville Fridays&quot;,
+          "startDate": &quot;19:00&quot;,
+          "location": {
+            "@type": "Place",
+            "name": &quot;Hotel Esplanade- The Basement&quot;,
+            "address": &quot;11 The Esplanade, St Kilda VIC 3182&quot;
+          },
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "url": "https://allgigs-ae406.web.app/events/nashville-fridays-1900/",
+          "description": &quot;&quot;,
+          "offers": {
+            "@type": "Offer",
+            "url": &quot;https://tickets.avclive.com.au/outlet/event/d89c7916-ae64-449e-90f6-b655e7eae768&quot;,
+            "price": &quot;&quot;,
+            "priceCurrency": "AUD",
+            "availability": "https://schema.org/InStock"
+          },
+          "genre": [&quot;Country&quot;]
+        }
+        </script>
+      </li>
+    
+      <li class="mb-6">
         <a href="/events/the-amigos-2100/" class="text-lg font-bold hover:underline">The Amigos</a>
         <div class="text-xs italic mb-1">
           
@@ -216,6 +263,12 @@
       {
         "@type": "ListItem",
         "position": 3,
+        "url": "https://allgigs-ae406.web.app/events/nashville-fridays-1900/"
+      },
+      
+      {
+        "@type": "ListItem",
+        "position": 4,
         "url": "https://allgigs-ae406.web.app/events/the-amigos-2100/"
       }
       

@@ -2,13 +2,45 @@ const API_BASE = "https://api.lml.live/gigs/query?location=melbourne";
 
 // Helper to get date in Australia/Melbourne timezone as YYYY-MM-DD
 function getMelbourneDate(offset = 0) {
-  // Use UTC+10:00 for Australia/Melbourne (no DST handling for simplicity)
+  // Use Intl.DateTimeFormat to get the current date in Melbourne timezone
+  // This handles DST automatically without requiring external libraries
   const now = new Date();
-  // Convert to Melbourne time by adding the offset from UTC
-  const melOffset = 10 * 60; // minutes
-  const local = new Date(now.getTime() + (now.getTimezoneOffset() + melOffset) * 60000);
-  local.setDate(local.getDate() + offset);
-  return local.toISOString().split("T")[0];
+  
+  // Format the date in Melbourne timezone
+  const formatter = new Intl.DateTimeFormat('en-AU', {
+    timeZone: 'Australia/Melbourne',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+  
+  // Get components and build YYYY-MM-DD format
+  const parts = formatter.formatToParts(now);
+  const year = parts.find(part => part.type === 'year').value;
+  const month = parts.find(part => part.type === 'month').value;
+  const day = parts.find(part => part.type === 'day').value;
+  
+  // Create a date string and then add the offset
+  const dateParts = [year, month, day].join('-');
+  
+  // Handle the offset by creating a new date and adjusting it
+  const baseDate = new Date(`${dateParts}T00:00:00+10:00`); // Use any timezone, we'll format again
+  baseDate.setDate(baseDate.getDate() + offset);
+  
+  // Format the offset date
+  const offsetFormatter = new Intl.DateTimeFormat('en-AU', {
+    timeZone: 'Australia/Melbourne',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+  
+  const offsetParts = offsetFormatter.formatToParts(baseDate);
+  const offsetYear = offsetParts.find(part => part.type === 'year').value;
+  const offsetMonth = offsetParts.find(part => part.type === 'month').value;
+  const offsetDay = offsetParts.find(part => part.type === 'day').value;
+  
+  return `${offsetYear}-${offsetMonth}-${offsetDay}`;
 }
 
 const fs = require('fs');

@@ -3,19 +3,50 @@ title: "All Events"
 permalink: "events/index.html"
 layout: layout.njk
 ---
-<!-- DEBUG: allEvents collection length: {{ collections.allEvents | length }} -->
-
 <!-- 4-column grid: one day per column, today + next 3 days -->
+
+<!-- Minimal debug (will remove after testing) -->
+<div style="background: #f5f5f5; padding: 5px; margin-bottom: 10px; font-size: 12px;">
+  <p><b>Days count:</b> {{ days | length }}</p>
+  {% for day in days %}
+    <p><b>{{ day.date }}:</b> {{ eventsByDateLocality[day.date] | length }} locality groups</p>
+  {% endfor %}
+</div>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 border-l border-r border-black">
 
   {% for day in days %}
     <section class="border-l border-black pl-4">
-      <h2 class="text-[1.26rem] font-bold border-b border-black pb-2 mb-4 uppercase tracking-wide" style="font-size: 1.26rem;">
-        <a href="/events/date/{{ day.date }}/" class="hover:underline">
-          {{ day.date | humanDateLabel }}
+      <h2 class="text-[1.26rem] font-bold mb-2 uppercase tracking-wide" style="font-size: 1.26rem; margin-bottom: 0.75rem;">
+        <a href="/events/date/{{ day.date }}/" style="text-decoration: none;">
+          {%- set label = day.date | humanDateLabel -%}
+          {%- if label == "tonight" -%}
+            Today
+          {%- elif label == "tomorrow" -%}
+            Tomorrow
+          {%- else -%}
+            {{ day.date | dayNameMelbourne }}
+          {%- endif -%}
         </a>
       </h2>
-      {% set locGroups = eventsByDateLocality[day.date] %}
+      {# Sort localities: "St kilda" first, then others #}
+      {% set locGroups = (eventsByDateLocality[day.date] | sort(attribute='locality')) %}
+      {% set stKildaGroups = locGroups | selectattr('locality', 'search', 'St kilda') | list %}
+      {% set otherGroups = locGroups | rejectattr('locality', 'search', 'St kilda') | list %}
+      {% set locGroups = stKildaGroups + otherGroups %}
+      
+      <!-- Debug group info for {{ day.date }} -->
+      <div style="background: #e6f7ff; padding: 5px; margin: 5px 0; font-size: 11px;">
+        <p>locGroups length: {{ locGroups | length }}</p>
+        {% for group in locGroups %}
+          <p>Group: {{ group.locality }} - {{ group.events | length }} events</p>
+          {% for event in group.events %}
+            <span style="border-bottom: 1px dotted #ccc; display: block; margin: 2px 0;">
+              {{ event.name }} @ {{ event.venue }} ({{ event.formatted_time }})
+            </span>
+          {% endfor %}
+        {% endfor %}
+      </div>
+      
       {% if locGroups and locGroups.length > 0 %}
         {% for group in locGroups %}
           <div class="mb-4">

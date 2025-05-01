@@ -107,6 +107,17 @@ module.exports = function(eleventyConfig) {
     return date.toFormat("ccc d LLL");
   });
 
+  // Add a filter to get today's date in Melbourne timezone as "yyyy-MM-dd"
+  eleventyConfig.addFilter("todayMelbourne", function() {
+    return DateTime.now().setZone("Australia/Melbourne").toFormat("yyyy-MM-dd");
+  });
+
+  // Add a filter to get the day name in Melbourne timezone from a date string
+  eleventyConfig.addFilter("dayNameMelbourne", function(dateString) {
+    if (!dateString) return "";
+    return DateTime.fromISO(dateString, { zone: "Australia/Melbourne" }).toFormat("cccc");
+  });
+
   // Optionally, set input/output directories if you want to further isolate content
   return {
     addAllPagesToCollections: true,

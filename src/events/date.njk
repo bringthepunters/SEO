@@ -1,9 +1,9 @@
 ---
 pagination:
-  data: collections.date
+  data: datePages
   size: 1
   alias: datePage
-permalink: "{{ datePage.permalink }}"
+permalink: "events/date/{{ datePage.date }}/index.html"
 layout: layout.njk
 ---
 
@@ -17,17 +17,30 @@ layout: layout.njk
     <section class="mb-8">
       <h2 class="text-xl font-semibold mb-2">{{ group.locality }}</h2>
       {% for event in group.events %}
-        <article class="mb-4">
-          <h3 class="text-lg font-bold">
-            <a href="/events/{{ event.slug }}/" class="hover:underline">{{ event.name }}</a>
-          </h3>
-          <div class="text-sm mb-1">
+        <article class="mb-5">
+          <h4 class="text-lg font-bold leading-snug mb-0.5 flex items-center">
+            <a href="/events/{{ event.slug }}/" class="hover:text-gray-700 focus:text-gray-700 transition-colors" style="text-decoration: none;">
+              {{ event.name }}
+            </a>
+            <a href="/events/{{ event.slug }}/" class="ml-2 text-2xl font-serif" aria-label="View event details" style="font-family: 'Times New Roman', Times, serif;">&#8594;</a>
+          </h4>
+          <p class="text-xs italic mb-0.5">
+            {% if event.venue_location_url %}
+              <a href="{{ event.venue_location_url }}" class="underline hover:text-gray-700" target="_blank" rel="noopener">
+                {{ event.venue }}
+              </a>
+            {% else %}
+              {{ event.venue }}
+            {% endif %}
+          </p>
+          <p class="text-xs mb-0.5">{{ event.formatted_time }}</p>
+          <p class="text-xs mb-0.5">{{ event.address }}</p>
+          <div class="flex flex-wrap gap-1 mt-1">
             {% for genre in event.genres %}
-              <span class="inline-block bg-gray-200 rounded px-2 py-0.5 mr-1">{{ genre }}</span>
+              <a href="/genre/{{ genre | slug }}/" class="italic text-xs text-black hover:underline" style="font-style: italic; background: none; border: none; padding: 0; margin: 0 0.25em 0 0; text-transform: none;">
+                <em>{{ genre }}</em>
+              </a>
             {% endfor %}
-          </div>
-          <div class="text-xs text-gray-700">
-            {{ event.venue }} | {{ event.formatted_time }} | {{ event.address }}
           </div>
         </article>
       {% endfor %}
