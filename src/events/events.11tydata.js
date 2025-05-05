@@ -154,15 +154,37 @@ module.exports = async function () {
   for (const d of days) {
     eventsByDate[d] = {};
   }
+  
+  // Debug: Log some events data to check format
+  console.log("Days format:", days);
+  console.log("First 5 events date format:", events.slice(0, 5).map(e => ({
+    name: e.name,
+    date: e.date,
+    locality: e.locality,
+    venue: e.venue
+  })));
+  console.log("Total events:", events.length);
+  
+  let matchingDateCount = 0;
+  let nonMatchingDateCount = 0;
+  
   for (const event of events) {
-    if (eventsByDate[event.date]) {
+    // Check if the event date is one of our expected dates
+    if (days.includes(event.date)) {
+      matchingDateCount++;
       const loc = event.locality || "Other";
       if (!eventsByDate[event.date][loc]) {
         eventsByDate[event.date][loc] = [];
       }
       eventsByDate[event.date][loc].push(event);
+    } else {
+      nonMatchingDateCount++;
+      console.log("Event with non-matching date:", event.name, event.date, "Expected one of:", days);
     }
   }
+  
+  console.log("Events with matching dates:", matchingDateCount);
+  console.log("Events with non-matching dates:", nonMatchingDateCount);
 
   // For each day, create an array of { locality, events } sorted by locality name
   const eventsByDateLocality = {};
@@ -172,6 +194,8 @@ module.exports = async function () {
       locality: loc,
       events: eventsByDate[d][loc]
     }));
+    console.log(`Day ${d} has ${locs.length} localities with events:`,
+      eventsByDateLocality[d].map(g => `${g.locality}: ${g.events.length} events`));
   }
 
   // Return grouped events by date and locality, and the day keys (for column order)
