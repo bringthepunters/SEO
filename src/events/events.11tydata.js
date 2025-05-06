@@ -96,11 +96,13 @@ module.exports = async function () {
         if (postcodeToLocality[postcode]) {
           locality = postcodeToLocality[postcode];
         } else {
-          // Fallback: try to extract locality name from address (e.g., "Fitzroy VIC 3065" or "Fitzroy 3065")
+          // Fallback: try to extract locality name from address (e.g., "Fitzroy VIC 3065" or "Fitzroy 3065" or "Brunswick Street Fitzroy")
           const locMatch = event.venue.address.match(/,\s*([A-Za-z\s]+)\s+VIC\s*\d{4}/i) ||
                            event.venue.address.match(/,\s*([A-Za-z\s]+)\s+\d{4}/i) ||
                            event.venue.address.match(/([A-Za-z\s]+)\s+VIC\s*\d{4}/i) ||
-                           event.venue.address.match(/([A-Za-z\s]+)\s+\d{4}/i);
+                           event.venue.address.match(/([A-Za-z\s]+)\s+\d{4}/i) ||
+                           // Match addresses ending with suburb name (e.g., "Brunswick Street Fitzroy")
+                           event.venue.address.match(/\s([A-Za-z]+)$/i);
           if (locMatch && locMatch[1]) {
             locality = locMatch[1].trim().toUpperCase();
           }
