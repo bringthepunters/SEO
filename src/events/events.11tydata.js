@@ -174,7 +174,16 @@ module.exports = async function () {
     // Check if the event date is one of our expected dates
     if (days.includes(event.date)) {
       matchingDateCount++;
-      const loc = event.locality || "Other";
+      // Normalize locality case to prevent duplicate headings
+      // Convert to title case (first letter of each word capitalized)
+      const rawLoc = event.locality || "Other";
+      const loc = rawLoc.split(' ').map(word =>
+        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      ).join(' ');
+      
+      // Store the normalized locality back on the event
+      event.locality = loc;
+      
       if (!eventsByDate[event.date][loc]) {
         eventsByDate[event.date][loc] = [];
       }

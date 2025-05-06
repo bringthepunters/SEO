@@ -19,13 +19,18 @@ module.exports = async function() {
     }
   }
 
-  // Group events by locality
+  // Group events by locality (normalize case to prevent duplicate headings)
   const localityMap = {};
   for (const event of allEvents) {
-    const name = event.locality || 'Other';
+    let name = event.locality || 'Other';
+    // Normalize the display name - use title case for display
+    const displayName = name.split(' ').map(word =>
+      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    ).join(' ');
+    
     const slug = slugify(name);
     if (!localityMap[slug]) {
-      localityMap[slug] = { name, slug, gigs: [] };
+      localityMap[slug] = { name: displayName, slug, gigs: [] };
     }
     localityMap[slug].gigs.push(event);
   }
