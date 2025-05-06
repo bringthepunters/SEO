@@ -66,25 +66,36 @@ layout: layout.njk
               {
                 "@context": "https://schema.org",
                 "@type": "Event",
-                "name": {{ event.name | dump }},
-                "startDate": {{ event.start_time | dump }},
+                "name": {{ event.name | dump | safe }},
+                "startDate": "{{ event.date }}T{{ event.start_time | default('00:00') }}+10:00",
                 "location": {
                   "@type": "Place",
-                  "name": {{ event.venue | dump }},
-                  "address": {{ event.address | dump }}
+                  "name": {{ event.venue | dump | safe }},
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Melbourne",
+                    "streetAddress": {{ event.address | dump | safe }}
+                  }
                 },
                 "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
                 "eventStatus": "https://schema.org/EventScheduled",
-                "url": "/events/{{ event.slug }}/",
-                "description": {{ event.information | dump }},
+                "url": "https://allgigs-ae406.web.app/events/{{ event.slug }}/",
+                "description": {{ (event.information or "Live music event in Melbourne") | dump | safe }},
                 "offers": {
                   "@type": "Offer",
-                  "url": {{ event.ticket_link | dump }},
-                  "price": {{ event.price | dump }},
+                  "url": {{ (event.ticket_link or "https://allgigs-ae406.web.app/events/" + event.slug + "/") | dump | safe }},
+                  "price": {{ (event.price or "0") | dump | safe }},
                   "priceCurrency": "AUD",
                   "availability": "https://schema.org/InStock"
                 },
-                "genre": [{% for genre in event.genres %}{{ genre | dump }}{% if not loop.last %}, {% endif %}{% endfor %}]
+                "performer": {
+                  "@type": "MusicGroup",
+                  "name": {{ event.name | dump | safe }}
+                },
+                "organizer": {
+                  "@type": "Organization",
+                  "name": {{ event.venue | dump | safe }}
+                }
               }
               </script>
               </article>
