@@ -1,0 +1,68 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {# Main events landing page - highest priority #}
+  <url>
+    <loc>https://allgigs-ae406.web.app/events/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <lastmod>{{ "" | todayMelbourne }}</lastmod>
+  </url>
+
+  {# Event date pages #}
+  {% for page in collections.all %}
+    {% if page.url and page.url.includes('/events/date/') %}
+    <url>
+      <loc>https://allgigs-ae406.web.app{{ page.url }}</loc>
+      <changefreq>daily</changefreq>
+      <priority>0.9</priority>
+      <lastmod>{{ "" | todayMelbourne }}</lastmod>
+    </url>
+    {% endif %}
+  {% endfor %}
+
+  {# Individual event pages #}
+  {% for event in collections.allEvents %}
+    <url>
+      <loc>https://allgigs-ae406.web.app/events/{{ event.slug }}/</loc>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+      <lastmod>{{ "" | todayMelbourne }}</lastmod>
+    </url>
+  {% endfor %}
+
+  {# Locality pages - using collections.all to find pages #}
+  {% for page in collections.all %}
+    {% if page.url and page.url.includes('/locality/') %}
+    <url>
+      <loc>https://allgigs-ae406.web.app{{ page.url }}</loc>
+      <changefreq>daily</changefreq>
+      <priority>0.8</priority>
+      <lastmod>{{ "" | todayMelbourne }}</lastmod>
+    </url>
+    {% endif %}
+  {% endfor %}
+
+  {# Genre pages - using collections.all to find pages #}
+  {% for page in collections.all %}
+    {% if page.url and page.url.includes('/genre/') %}
+    <url>
+      <loc>https://allgigs-ae406.web.app{{ page.url }}</loc>
+      <changefreq>daily</changefreq>
+      <priority>0.6</priority>
+      <lastmod>{{ "" | todayMelbourne }}</lastmod>
+    </url>
+    {% endif %}
+  {% endfor %}
+
+  {# Homepage with lowest priority since it's not the main landing page #}
+  <url>
+    <loc>https://allgigs-ae406.web.app/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.3</priority>
+    <lastmod>{{ "" | todayMelbourne }}</lastmod>
+  </url>
+</urlset>
